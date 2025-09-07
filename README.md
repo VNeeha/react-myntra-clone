@@ -21,7 +21,7 @@ The project demonstrates **frontend-backend integration**, **state management**,
 
 - React (Vite)
 - Redux Toolkit
-- CSS / Tailwind (if used)
+- Bootstrap
 
 **Backend**
 

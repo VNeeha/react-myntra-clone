@@ -1,12 +1,15 @@
+
+
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const { getStoredItems, storeItems } = require('./data/items');
+const path = require('path');
 
 const app = express();
 
 app.use(bodyParser.json());
 
+// CORS (if your frontend is separate during dev)
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST');
@@ -14,9 +17,9 @@ app.use((req, res, next) => {
   next();
 });
 
+// ----- API ROUTES -----
 app.get('/items', async (req, res) => {
   const storedItems = await getStoredItems();
-  await new Promise((resolve, reject) => setTimeout(() => resolve(), 4000));
   res.json({ items: storedItems });
 });
 
@@ -38,4 +41,12 @@ app.post('/items', async (req, res) => {
   res.status(201).json({ message: 'Stored new item.', item: newItem });
 });
 
-app.listen(8080);
+// ----- STATIC FRONTEND -----
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+// Catch-all route for React Router
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+
+app.listen(8080, () => console.log("Server running on port 8080"));
