@@ -12,7 +12,7 @@ const useFetchItems = () => {
     if (!fetchDone) {
       const controller = new AbortController();
       const signal = controller.signal;
-      const URL = "http://localhost:8080/items";
+      const URL = "/items";
       const fetchData = async () => {
         try {
           dispatch(fetchActions.fetchStarted());
