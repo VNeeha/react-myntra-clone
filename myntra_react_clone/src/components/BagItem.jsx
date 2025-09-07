@@ -1,9 +1,29 @@
 // STYLES
 import styles from "../css/App.module.css";
+// REACT-ICONS
+import { AiOutlineClose } from "react-icons/ai";
+// ACTIONS FROM SLICES
+import { bagActions } from "../store/bagSlice";
+// EXTERNAL FUNCTIONALITIES
+import { useDispatch } from "react-redux";
 
 const BagItem = ({ item }) => {
+  const dispatch = useDispatch();
+  // REMOVE FROM BAG
+  const removeFromBagHandler = () => {
+    dispatch(bagActions.removeFromBag(item.id));
+  };
   return (
-    <div className={`card mb-3 ${styles.bagItemCard}`}>
+    <div className={`card mb-3 position-relative ${styles.bagItemCard}`}>
+      {/* Remove Icon */}
+      <button
+        className="btn btn-sm btn-light position-absolute top-0 end-0 m-2"
+        title="Remove"
+        onClick={removeFromBagHandler}
+      >
+        <AiOutlineClose size={18} />
+      </button>
+
       <div className="row g-0 align-items-center">
         {/* Image */}
         <div className="col-4 col-md-3">
@@ -45,4 +65,5 @@ const BagItem = ({ item }) => {
     </div>
   );
 };
+
 export default BagItem;

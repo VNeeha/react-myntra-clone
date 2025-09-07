@@ -5,10 +5,14 @@ import Bag from "./routes/Bag.jsx";
 
 // STYLES
 
+// STORE
+import myntraStore from "./store/storeBase.js";
+
 // EXTERNAL FUNCTIONALITIES
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
 
 // CREATING LAYOUT ROUTES
 const router = createBrowserRouter([
@@ -24,6 +28,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={myntraStore}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

@@ -1,7 +1,26 @@
 // STYLES
 import styles from "../css/App.module.css";
+// EXTERNAL FUNCTIONALITIES
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+
+// ACTIONS FROM SLICES
+import { bagActions } from "../store/bagSlice";
 
 const HomeItem = ({ item }) => {
+  const bagIds = useSelector((store) => store.bag);
+  const addedToBag = bagIds.includes(item.id);
+
+  const dispatch = useDispatch();
+  // ADD TO BAG
+  const addToBagHandler = () => {
+    dispatch(bagActions.addToBag(item.id));
+  };
+  // REMOVE FROM BAG
+  const removeFromBagHandler = () => {
+    dispatch(bagActions.removeFromBag(item.id));
+  };
+
   return (
     <div className={`card h-100 ${styles.homeItemCard}`}>
       {/* Image */}
@@ -34,10 +53,21 @@ const HomeItem = ({ item }) => {
           </span>
         </p>
 
-        {/* Add Button (disabled for now) */}
-        <button className="btn btn-sm btn-dark mt-auto" disabled>
-          Add to Bag
-        </button>
+        {addedToBag ? (
+          <button
+            className="btn btn-sm btn-success mt-auto"
+            onClick={removeFromBagHandler}
+          >
+            Remove from Bag
+          </button>
+        ) : (
+          <button
+            className="btn btn-sm btn-success mt-auto"
+            onClick={addToBagHandler}
+          >
+            Add to Bag
+          </button>
+        )}
       </div>
     </div>
   );
