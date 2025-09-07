@@ -97,6 +97,17 @@ npm run dev
 
 ---
 
+## 🚀 Live Demo  
+🔗 [Deployed on Render](https://react-myntra-clone-rtmc.onrender.com)
+
+---
+
+## 📸 Screenshots  
+![Homepage](./screenshots/homepage.png)  
+![Bag](./screenshots/bag.png)  
+
+---
+
 ## 📜 License
 
 This project is for **learning and educational purposes** only.  
